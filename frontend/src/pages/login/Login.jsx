@@ -41,7 +41,7 @@ export default function Login() {
       const currentTime = Date.now() / 1000;
 
       if (decodedToken.exp > currentTime) {
-        navigate("/user/estoque");
+        navigate("/user/pedidos");
       }
     }
   }, [navigate]);
@@ -80,7 +80,7 @@ export default function Login() {
       localStorage.setItem("userId", data.id);
       localStorage.setItem("level", data.level);
       localStorage.setItem("store", data.store);
-      navigate("/user/estoque");
+      navigate("/user/pedidos");
     } else {
       setPassword("");
       setEmail("");

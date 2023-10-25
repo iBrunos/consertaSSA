@@ -7,13 +7,11 @@ import unidecode from "unidecode";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 
-export default function FormProducts() {
+export default function FormOrders() {
   const [items, setItems] = useState([]);
-  const [product, setProduct] = useState("");
-  const [price, setPrice] = useState("");
-  const [brand, setBrand] = useState("");
-  const [description, setDescription] = useState("");
-  const [inserted_by, setInserted_by] = useState("");
+  const [type, setType] = useState("");
+  const [status, setStatus] = useState("");
+  const [anexos, setAnexos] = useState();
   const [editingItem, setEditingItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -47,29 +45,35 @@ export default function FormProducts() {
   const addItem = async (e) => {
     e.preventDefault();
 
-    const username = localStorage.getItem("username");
     const token = localStorage.getItem("token");
 
     const newItem = {
-      product,
-      price,
-      brand,
-      description,
-      inserted_by,
+      type,
+      status,
     };
-    newItem.inserted_by = username;
 
-    const response = await axios.post(API_URL, newItem, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    // Create a new FormData object
+    const formData = new FormData();
+    formData.append("avatar", avatar); // Add the image file to the form data
+    formData.append("type", newItem.type);
+    formData.append("status", newItem.status);
 
-    setItems([...items, response.data]);
-    setProduct("");
-    setPrice("");
-    setBrand("");
-    setDescription("");
-    fetchItems();
-    toast.success("Pedido criado com sucesso!");
+    try {
+      const response = await axios.post(API_URL, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+        },
+      });
+      setItems([...items, response.data]);
+      setType("");
+      setStatus("");
+      setAvatar(""); // Reset the selected image file
+      fetchItems();
+      toast.success("Pedido criado com sucesso!");
+    } catch (error) {
+      console.error(error);
+    }
   };
   const deleteItem = async (id) => {
     const token = localStorage.getItem("token");
@@ -93,44 +97,43 @@ export default function FormProducts() {
     });
 
     const item = response.data;
-    setProduct(item.product);
-    setPrice(item.price);
-    setBrand(item.brand);
-    setDescription(item.description);
-    setInserted_by(item.inserted_by);
+    setType(item.type);
+    setStatus(item.status);
+
   };
 
   const updateItem = async (e) => {
     e.preventDefault();
-    const username = localStorage.getItem("username");
     const updatedItem = {
       _id: editingItem,
-      product,
-      price,
-      brand,
-      description,
-      inserted_by,
+      type,
+      status,
+      anexos,
     };
-    updatedItem.inserted_by = username;
+    const formData = new FormData();
+    formData.append("_id", updatedItem._id);
+    formData.append("anexos", updatedItem.anexos); // Add the image file to the form data
+    formData.append("type", updatedItem.type);
+    formData.append("status", updatedItem.status);
 
     const token = localStorage.getItem("token");
 
-    const response = await axios.put(`${API_URL}/${editingItem}`, updatedItem, {
-      headers: { Authorization: `Bearer ${token}` },
+    const response = await axios.put(`${API_URL}/${editingItem}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+      },
     });
     setItems(
       items.map((item) => (item._id === editingItem ? response.data : item))
     );
-    setProduct("");
-    setPrice("");
-    setBrand("");
-    setDescription("");
-    setInserted_by("");
+    setType("");
+    setStatus("");
+    setAnexos("");
     setEditingItem(null);
     fetchItems();
-    toast.success("Pedido Atualizado com sucesso!");
+    toast.success("Pedido atualizado com sucesso!");
   };
-
   return (
     <>
     <ToastContainer />
@@ -141,9 +144,9 @@ export default function FormProducts() {
       >
         <input
           type="text"
-          value={product}
+          value={type}
           placeholder="Pedido"
-          onChange={(e) => setProduct(e.target.value)}
+          onChange={(e) => setType(e.target.value)}
           className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
           id="input__product"
           required
@@ -152,9 +155,9 @@ export default function FormProducts() {
           type="number"
           inputMode="decimal"
           lang="en-US"
-          value={price}
+          value={status}
           placeholder="Preço"
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setStatus(e.target.value)}
           required
           min="0"
           max="9999.99"
@@ -162,22 +165,6 @@ export default function FormProducts() {
           className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
         />
 
-        <input
-          type="text"
-          value={brand}
-          placeholder="Marca"
-          onChange={(e) => setBrand(e.target.value)}
-          className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
-          required
-        />
-        <input
-          type="text"
-          value={description}
-          placeholder="Descrição"
-          onChange={(e) => setDescription(e.target.value)}
-          className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
-          
-        />
         <button
           type="submit"
           className="block mr-16 lg:mt-0 mt-2 w-[10rem] border rounded-md lg:ml-2 ml-0 p-2 bg-orange-500 text-white font-medium hover:bg-orange-600"
@@ -239,7 +226,7 @@ export default function FormProducts() {
                       searchTerm?.toLowerCase() || ""
                     );
                     const itemUserUnidecoded = unidecode(
-                      item.product?.toLowerCase() || ""
+                      item.type?.toLowerCase() || ""
                     );
                     if (searchTermUnidecoded === "") {
                       return true;
@@ -253,7 +240,7 @@ export default function FormProducts() {
                   .map((item, index) => (
                     <tr className="w-full" key={item._id || index}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.product}
+                        {item.type}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         R$: {item.price}

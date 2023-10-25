@@ -52,7 +52,7 @@ const User = mongoose.model("Users", UserSchema);
     if (!adminExists) {
         const adminUser = new User({
             username: 'admin',
-            password: 'adminpassword', // You should use a strong password here and not 'adminpassword'.
+            password: 'adminpassword',
             level: 'admin',
             email: 'admin@example.com',
             phone: '1234567890',
@@ -64,7 +64,6 @@ const User = mongoose.model("Users", UserSchema);
     }
 }
 
-// Run the function to create the admin user when the collection is created
 createAdminUser();*/
 
 

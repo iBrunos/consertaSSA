@@ -1,33 +1,36 @@
-import productService from "../services/order.service.js";
+import orderService from "../services/order.service.js";
 
 const createService = async (req, res) => {
   try {
-    const { product, price, brand, description, inserted_by } = req.body;
+    const { type, status } = req.body;
 
     // Verificando se todos os campos foram enviados
-    if (!product || !price || !brand || !inserted_by) {
+    if (!type || !status) {
       res.status(400).send({
         message: "Submit all fields for registration ",
       });
     }
+    // Obtendo o buffer da imagem
+    const anexos = req.file ? req.file.buffer : null;
 
-    const createProduct = await productService.createService(req.body).catch((err) => console.log(err.message));
-    
-    if (!createProduct) {
+    const createOrder = await orderService.createService({
+      type,
+      status,
+      anexos, // Passa o buffer do arquivo para a propriedade "anexos"
+    });
+
+    if (!createOrder) {
       return res.status(400).send({
-        message: "Error creating Product",
+        message: "Error creating User",
       });
     }
-    
+
     res.status(201).send({
-      message: "Product created successfully",
+      message: "Order created successfully",
       user: {
-        id: createProduct.id,
-        product,
-        price,
-        brand,
-        description,
-        inserted_by,
+        id: createOrder.id,
+        type,
+        status,
       },
     });
   } catch (err) {
@@ -37,7 +40,7 @@ const createService = async (req, res) => {
 const deleteService = async (req, res) => {
   try {
     const { id } = req.params;
-    await productService.deleteService(id);
+    await orderService.deleteService(id);
 
     res.status(204).end();
   } catch (error) {
@@ -46,14 +49,14 @@ const deleteService = async (req, res) => {
 };
 const findAll = async (req, res) => {
   try {
-    const product = await productService.findAllService();
+    const order = await orderService.findAllService();
 
-    if (product.length === 0) {
+    if (order.length === 0) {
       return res.status(204).send({
-        message: "There are no registered products",
+        message: "There are no registered orders",
       });
     }
-    res.send(product);
+    res.send(order);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -61,38 +64,40 @@ const findAll = async (req, res) => {
 const findById = async (req, res) => {
   try {
     const id = req.params.id;
-    const product = await productService.findByIdService(id);
-    if (!product) {
-      return res.status(404).send({ message: "Product not found" });
+    const order = await orderService.findByIdService(id);
+    if (!order) {
+      return res.status(404).send({ message: "Order not found" });
     }
-    res.send(product);
+    res.send(order);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
 };
 const update = async (req, res) => {
   try {
-    const { _id, product, price, brand, description, inserted_by } = req.body;
-    
+    const { _id, type, status} = req.body;
+
     // Verificando se todos os campos foram enviados
-    if (!product && !price && !brand && !description && !inserted_by) {
+    if (!type || !status) {
       res.status(400).send({
         message: "Submit at least one field for update",
       });
     }
 
-    await productService.updateService(
+    const anexos = req.file ? req.file.buffer : null;
+
+    await userService.updateService(
       _id,
-      product,
-      price,
-      brand,
-      description,
-      inserted_by
+      type,
+      status,
+      anexos
     );
+
     res.send({
-      message: "Product successfully updated",
+      message: "Order successfully updated",
     });
   } catch (err) {
+    console.error(err);
     res.status(500).send({ message: err.message });
   }
 };

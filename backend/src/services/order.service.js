@@ -1,15 +1,15 @@
-import Product from '../models/Product.js';
+import Order from '../models/Order.js';
 
-const createService = (body) => Product.create(body)
+const createService = (body) => Order.create(body)
 
-const findAllService = () => Product.find();
+const findAllService = () => Order.find();
 
-const findByIdService = (id) => Product.findById(id);
+const findByIdService = (id) => Order.findById(id);
 
-const updateService = (id, product, price, brand, description, inserted_by) => Product.
-findOneAndUpdate({_id: id},{product, price, brand, description, inserted_by});
+const updateService = (id, type, status, anexos) => Order.
+findOneAndUpdate({_id: id},{type, status, anexos});
 
-const deleteService = (id) => Product.findOneAndDelete({_id: id});
+const deleteService = (id) => Order.findOneAndDelete({_id: id});
 export default {
     createService,
     findAllService,

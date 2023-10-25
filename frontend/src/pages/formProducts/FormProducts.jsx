@@ -69,7 +69,7 @@ export default function FormProducts() {
     setBrand("");
     setDescription("");
     fetchItems();
-    toast.success("Produto criado com sucesso!");
+    toast.success("Pedido criado com sucesso!");
   };
   const deleteItem = async (id) => {
     const token = localStorage.getItem("token");
@@ -78,7 +78,7 @@ export default function FormProducts() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setItems(items.filter((item) => item._id !== id));
-      toast.success("Produto apagado com sucesso!");
+      toast.success("Pedido apagado com sucesso!");
     } catch (error) {
       console.error(error);
     }
@@ -128,7 +128,7 @@ export default function FormProducts() {
     setInserted_by("");
     setEditingItem(null);
     fetchItems();
-    toast.success("Produto Atualizado com sucesso!");
+    toast.success("Pedido Atualizado com sucesso!");
   };
 
   return (
@@ -142,7 +142,7 @@ export default function FormProducts() {
         <input
           type="text"
           value={product}
-          placeholder="Produto"
+          placeholder="Pedido"
           onChange={(e) => setProduct(e.target.value)}
           className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
           id="input__product"
@@ -224,7 +224,7 @@ export default function FormProducts() {
             <table className="w-full table-auto text-sm text-left">
               <thead className="bg-gray-50 text-gray-600 font-medium border-b">
                 <tr>
-                  <th className="py-3 px-6">Produto</th>
+                  <th className="py-3 px-6">Pedido</th>
                   <th className="py-3 px-6">Preço</th>
                   <th className="py-3 px-6">Marca</th>
                   <th className="py-3 px-6">Descrição</th>

@@ -4,19 +4,20 @@ const OrderSchema = new mongoose.Schema({
     Type: {
         type: String,
         require: true,
-        unique: true,
+        enum: ['Conserto de rua', 'Vazamento', 'Esgoto'],
+
     },
     Status: { 
-        type: Number, 
+        type: String, 
+        enum: ['Aberto', 'Fechado', 'Em andamento'],
         require: true,
     },
     Anexos: {
-        type: String,
+        type: Buffer,
         require: true,
     },
 });
 
+const Order = mongoose.model("Orders", OrderSchema);
 
-const Product = mongoose.model("Products", OrderSchema);
-
-export default Product;
+export default Order;

@@ -15,7 +15,7 @@ export default function FormOrders() {
   const [editingItem, setEditingItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const API_URL = 'https://api-happymakeup.vercel.app/product';
+  const API_URL = 'http://localhost:3000/order';
 
   const changePageTitle = (newTitle) => {
     document.title = newTitle;
@@ -136,34 +136,36 @@ export default function FormOrders() {
   };
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Header />
       <form
         onSubmit={editingItem !== null ? updateItem : addItem}
         className="flex lg:flex-row flex-col mb-0 mt-1 bg-white border-b-gray-200 border-b pl-8 pt-1 pb-2 ml-0"
       >
-        <input
-          type="text"
+        <select
           value={type}
-          placeholder="Pedido"
           onChange={(e) => setType(e.target.value)}
-          className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
-          id="input__product"
+          className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[16em] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
+          id="select__type"
           required
-        />
-        <input
-          type="number"
-          inputMode="decimal"
-          lang="en-US"
+        >
+          <option value="">Selecione o Tipo de Solicitação</option>
+          <option value="Conserto de rua">Conserto de rua</option>
+          <option value="Vazamento">Vazamento</option>
+          <option value="Esgoto">Esgoto</option>
+        </select>
+        <select
           value={status}
-          placeholder="Preço"
           onChange={(e) => setStatus(e.target.value)}
+          className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus-border-pink-500"
+          id="select__status"
           required
-          min="0"
-          max="9999.99"
-          step="0.01"
-          className="mr-2 border-gray-300 border rounded-md p-2 lg:w-[10rem] w-[20rem] lg:mt-0 mt-2 outline-none appearance-none placeholder-gray-500 text-gray-500 focus:border-pink-500"
-        />
+        >
+          <option value="">Selecione o Status</option>
+          <option value="Aberto">Aberto</option>
+          <option value="Fechado">Fechado</option>
+          <option value="Em andamento">Em andamento</option>
+        </select>
 
         <button
           type="submit"
@@ -211,12 +213,11 @@ export default function FormOrders() {
             <table className="w-full table-auto text-sm text-left">
               <thead className="bg-gray-50 text-gray-600 font-medium border-b">
                 <tr>
-                  <th className="py-3 px-6">Pedido</th>
-                  <th className="py-3 px-6">Preço</th>
-                  <th className="py-3 px-6">Marca</th>
-                  <th className="py-3 px-6">Descrição</th>
-                  <th className="py-3 px-6">Funcionário</th>
-                  <th className="py-3 px-6">Ações</th>
+                  <th className="py-3 px-6">Tipo de Solicitação</th>
+                  <th className="py-3 px-6">Data</th>
+                  <th className="py-3 px-6">Status</th>
+                  <th className="py-3 px-6">Anexos</th>
+
                 </tr>
               </thead>
               <tbody className="text-gray-600 divide-y">
@@ -243,16 +244,13 @@ export default function FormOrders() {
                         {item.type}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        R$: {item.price}
+                        R$: {item.data}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.brand}
+                        {item.status}
                       </td>
                       <td className="px-6 py-4 whitespace-normal break-words w-96">
-                        {item.description}
-                      </td>
-                      <td className="px-8 py-4 whitespace-nowrap">
-                        {item.inserted_by}
+                        {item.anexos}
                       </td>
                       <td className="px-6 whitespace-nowrap">
                         <button

@@ -22,7 +22,7 @@ export default function FormProducts() {
   const changePageTitle = (newTitle) => {
     document.title = newTitle;
   };
-  changePageTitle("Happy Makeup | Cadastro");
+  changePageTitle("ConsertaSSA | Pedidos");
 
   const fetchItems = async () => {
     const token = localStorage.getItem("token");
@@ -180,9 +180,9 @@ export default function FormProducts() {
         />
         <button
           type="submit"
-          className="block mr-16 lg:mt-0 mt-2 w-[10rem] border rounded-md lg:ml-2 ml-0 p-2 bg-pink-500 text-white font-medium hover:bg-pink-600"
+          className="block mr-16 lg:mt-0 mt-2 w-[10rem] border rounded-md lg:ml-2 ml-0 p-2 bg-orange-500 text-white font-medium hover:bg-orange-600"
         >
-          {editingItem !== null ? "Salvar Produto" : "Adicionar Produto"}
+          {editingItem !== null ? "Salvar Pedido" : "Adicionar Pedido"}
         </button>
         <section className="flex items-center space-x-2 border rounded-md p-2 lg:mt-0 mt-2 lg:w-64 w-[20rem] focus:border-pink-500 lg:ml-[43rem]">
           <svg
@@ -210,7 +210,7 @@ export default function FormProducts() {
       </form>
       <div className="p-0 m-2 text-center">
         <h3 className="text-gray-800 text-4xl font-bold text-center ">
-          CADASTRO DE PRODUTOS
+          SEUS PEDIDOS
         </h3>
       </div>
       <div className="bg-white mx-auto px-4 md:px-8">

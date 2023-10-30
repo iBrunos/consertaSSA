@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
+import { BiHelpCircle } from "react-icons/bi";
 import avatarDefault from "./../../assets/imgs/avatar.png";
 import StoreIcon from "@mui/icons-material/Store";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -189,7 +190,7 @@ const Header = () => {
 
                 {isGerente ? (
                   <Link
-                    to="/user/estoque"
+                    to="/user/pedidos"
                     className="text-black hover:bg-zinc-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                   >
                     <StoreIcon className="mr-1 font-bold" />
@@ -197,7 +198,7 @@ const Header = () => {
                   </Link>
                 ) : (
                   <Link
-                    to="/user/estoque"
+                    to="/user/pedidos"
                     className="text-black hover:bg-zinc-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium ml-[30rem]"
                   >
                     <StoreIcon className="mr-1 font-bold" />
@@ -207,7 +208,7 @@ const Header = () => {
 
                 {isGerente ? (
                   <Link
-                    to="/user/cadastro"
+                    to="/user/pedidos"
                     className="text-black hover:bg-zinc-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                   >
                     <AppRegistrationIcon className="mr-1 font-bold" />
@@ -224,7 +225,7 @@ const Header = () => {
                     to="/user/entradas"
                     className="text-black hover:bg-zinc-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    <AddShoppingCartIcon className="mr-1 font-bold" />
+                    <BiHelpCircle className="mr-1 font-bold" />
                     Ajuda
                   </Link>
                 ) : (

@@ -44,7 +44,6 @@ export default function FormOrders() {
 
   const addItem = async (e) => {
     e.preventDefault();
-
     const token = localStorage.getItem("token");
 
     const newItem = {
@@ -52,9 +51,8 @@ export default function FormOrders() {
       status,
     };
 
-    // Create a new FormData object
     const formData = new FormData();
-    formData.append("avatar", avatar); // Add the image file to the form data
+    formData.append("anexos", anexos);
     formData.append("type", newItem.type);
     formData.append("status", newItem.status);
 
@@ -62,17 +60,18 @@ export default function FormOrders() {
       const response = await axios.post(API_URL, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+          "Content-Type": "multipart/form-data",
         },
       });
       setItems([...items, response.data]);
       setType("");
       setStatus("");
-      setAvatar(""); // Reset the selected image file
+      setAnexos(null); // Reset the selected image file to null
       fetchItems();
-      toast.success("Pedido criado com sucesso!");
+      toast.success("Pedido criado com sucesso!"); // Enable toast for success
     } catch (error) {
       console.error(error);
+      toast.error("Erro ao criar pedido."); // Add toast for error
     }
   };
   const deleteItem = async (id) => {
@@ -132,7 +131,7 @@ export default function FormOrders() {
     setAnexos("");
     setEditingItem(null);
     fetchItems();
-    toast.success("Pedido atualizado com sucesso!");
+    //toast.success("Pedido atualizado com sucesso!");
   };
   return (
     <>
@@ -166,7 +165,19 @@ export default function FormOrders() {
           <option value="Fechado">Fechado</option>
           <option value="Em andamento">Em andamento</option>
         </select>
-
+        <label
+          htmlFor="meuArquivo"
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded cursor-pointer lg:mt-0 mt-2 w-[9rem]"
+        >
+          Escolher Foto
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          id="meuArquivo"
+          onChange={(e) => setAnexos(e.target.files[0])}
+          className="my-0 border-gray-300 rounded-sm outline-none appearance-none placeholder-pink-500 text-gray-500 focus:border-pink-500 hidden"
+        />
         <button
           type="submit"
           className="block mr-16 lg:mt-0 mt-2 w-[10rem] border rounded-md lg:ml-2 ml-0 p-2 bg-orange-500 text-white font-medium hover:bg-orange-600"

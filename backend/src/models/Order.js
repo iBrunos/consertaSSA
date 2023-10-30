@@ -1,20 +1,17 @@
 import mongoose from 'mongoose';
 
 const OrderSchema = new mongoose.Schema({
-    Type: {
+    type: {
         type: String,
-        require: true,
-        enum: ['Conserto de rua', 'Vazamento', 'Esgoto'],
+        required: true,
 
     },
-    Status: { 
+    status: { 
         type: String, 
-        enum: ['Aberto', 'Fechado', 'Em andamento'],
-        require: true,
+        required: true,
     },
-    Anexos: {
-        type: Buffer,
-        require: true,
+    anexos: {
+        type: Buffer
     },
 });
 

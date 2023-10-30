@@ -3,6 +3,9 @@ import orderService from "../services/order.service.js";
 const createService = async (req, res) => {
   try {
     const { type, status } = req.body;
+    console.log('Conteúdo do corpo da solicitação (req.body):', req.body);
+    console.log("type: ", type)
+    console.log("status: ", status)
 
     // Verificando se todos os campos foram enviados
     if (!type || !status) {

@@ -4,6 +4,8 @@ import Header from "../../components/header/Header";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import unidecode from "unidecode";
+import moment from 'moment';
+
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -11,7 +13,7 @@ export default function FormOrders() {
   const [items, setItems] = useState([]);
   const [type, setType] = useState("");
   const [status, setStatus] = useState("");
-  const [anexos, setAnexos] = useState();
+  const [anexos, setAnexos] = useState("");
   const [editingItem, setEditingItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -31,8 +33,9 @@ export default function FormOrders() {
     // fazer uma solicitação HTTP GET para a rota protegida com o token JWT
     try {
       const response = await axios.get(API_URL, config);
-
       setItems(response.data);
+      console.log(items)
+
     } catch (error) {
       console.error(error);
     }
@@ -41,6 +44,7 @@ export default function FormOrders() {
   useEffect(() => {
     fetchItems();
   }, []);
+
 
   const addItem = async (e) => {
     e.preventDefault();
@@ -100,7 +104,10 @@ export default function FormOrders() {
     setStatus(item.status);
 
   };
-
+  function formatDate(dateString) {
+    const date = moment(dateString).format("DD/MM/YYYY");
+    return date;
+  }
   const updateItem = async (e) => {
     e.preventDefault();
     const updatedItem = {
@@ -255,14 +262,21 @@ export default function FormOrders() {
                         {item.type}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        R$: {item.data}
+                        {formatDate(item.createdAt)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {item.status}
                       </td>
                       <td className="px-6 py-4 whitespace-normal break-words w-96">
-                        {item.anexos}
+                        {item.anexos && (
+                          <img
+                            src={URL.createObjectURL(new Blob([new Uint8Array(item.anexos.data)], { type: 'image/png' }))}
+                            alt="Anexos"
+                            className="w-full h-full rounded-full border lg:border-2"
+                          />
+                        )}
                       </td>
+
                       <td className="px-6 whitespace-nowrap">
                         <button
                           onClick={() => editItem(item._id)}

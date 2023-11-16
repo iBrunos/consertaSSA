@@ -120,6 +120,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-orange-400 focus:ring-opacity-40 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300"
                 type="email" placeholder="seuemail@exemplo.com"
+                required
               />
             </div>
 
@@ -180,6 +181,7 @@ export default function Login() {
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-orange-400 focus:ring-opacity-40 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 font-black"
                 type="password"
                 placeholder="●●●●●●●●"
+                required
               />
             </div>
             <div className="flex items-center justify-between mt-3">

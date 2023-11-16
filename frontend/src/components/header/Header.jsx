@@ -51,18 +51,16 @@ const Header = () => {
     navigate("/");
   };
 
-  const API_URL_STOCK = 'http://localhost:3000/stock';
   const API_URL = "http://localhost:3000/user";
-  const API_URL_ENTRY = "http://localhost:3000/entry";
+
   /*
   const API_URL_STOCK = 'https://api-happymakeup.vercel.app/stock';
   const API_URL = "https://api-happymakeup.vercel.app/user";
-  const API_URL_ENTRY = "https://api-happymakeup.vercel.app/entry";
+
 */
   useEffect(() => {
     setIsGerente(level === "Gerente");
     fetchItems();
-    fetchItemsEntrys();
     checkImageSrc();
   }, [level]);
 
@@ -86,77 +84,8 @@ const Header = () => {
     }
   };
 
-  const fetchItemsEntrys = async () => {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    try {
-      const response = await axios.get(API_URL_ENTRY, config);
-      const items = response.data;
-
-      const today = moment().startOf("day");
-      const oneMonthFromNow = moment().add(1, "month").startOf("day");
-
-      const expired = [];
-      const expiringSoon = [];
-
-      items.forEach((item) => {
-        const expirationDate = moment(item.expiration_date);
-
-        if (expirationDate.isBefore(today) && item.in_stock === true) {
-          expired.push(item);
-        } else if (
-          expirationDate.isSameOrBefore(oneMonthFromNow) &&
-          item.in_stock === true
-        ) {
-          expiringSoon.push(item);
-        }
-      });
-
-      setExpired(expired);
-      setExpiringSoon(expiringSoon);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const updateItem = async (id) => {
-    const username = localStorage.getItem("username");
-    try {
-      const quantityRemoved = prompt("Quantas unidades serão retiradas do estoque?");
-      if (quantityRemoved == null || quantityRemoved == '0') {
-        return
-      }
-      const updatedItem2 = {
-        _id: id,
-        username,
-        in_stock: false,
-        inserted_by,
-      };
-      const updatedItem = {
-        id_product: id,
-        quantity: quantityRemoved
-      };
-      updatedItem2.inserted_by = username;
-      const token = localStorage.getItem("token");
-
-      await axios.put(`${API_URL_ENTRY}/${id}`, updatedItem2, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      await axios.put(`${API_URL_STOCK}/${id}`, updatedItem, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      fetchItems();
-      toast.success("Produto vencido removido!");
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-      // Lide com o erro adequadamente (exemplo: exibindo uma mensagem de erro na interface do usuário).
-    }
-  };
+  
+  
 
   const checkImageSrc = () => {
     if (!imageSrc) {

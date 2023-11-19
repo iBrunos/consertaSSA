@@ -1,18 +1,7 @@
-# Happy Makeup - Controle de Estoque
-
-Bem-vindo ao repositório do projeto Happy Makeup! Este é um sistema de controle de estoque desenvolvido pela Archei Software para a loja de maquiagem Happy Makeup.
-
-<p align="center">
-  <img src="https://github.com/iBrunos/MernControleEstoque/blob/main/frontend/src/assets/imgs/ArcheiLogo.png?raw=true" alt="Logo da Archei Software">
-</p>
-
-## Sobre a loja
-
-A Happy Makeup é uma loja de maquiagem que oferece uma ampla variedade de produtos de beleza. Eles têm uma presença ativa no Instagram, onde você pode conferir suas últimas novidades e promoções: [Happy Makeup](https://www.instagram.com/happymakeaup_/)
 
 ## Sobre o projeto
 
-O projeto Happy Makeup - Controle de Estoque é um sistema web desenvolvido utilizando a stack MERN (MongoDB, Express.js, React.js, Node.js). Essa escolha foi baseada nas seguintes considerações:
+O projeto Conserta SSA utiliza a stack MERN (MongoDB, Express.js, React.js, Node.js). Essa escolha foi baseada nas seguintes considerações:
 
 - 💾 **MongoDB**: Um banco de dados NoSQL orientado a documentos, foi escolhido por sua flexibilidade e escalabilidade. Ele permite armazenar e recuperar dados de forma eficiente, além de ser compatível com a linguagem JSON utilizada pelo JavaScript.
 
@@ -24,11 +13,10 @@ O projeto Happy Makeup - Controle de Estoque é um sistema web desenvolvido util
 
 ## Funcionalidades principais
 
-- Cadastro de produtos: permite adicionar novos produtos ao estoque.
-- Listagem de produtos: exibe a lista de produtos disponíveis no estoque.
-- Atualização de produtos: permite editar as informações dos produtos existentes.
-- Remoção de produtos: possibilita remover produtos do estoque.
-- Controle de estoque: registra a quantidade disponível de cada produto.
+- Cadastro de pedidos: permite adicionar novos pedidos ao estoque.
+- Listagem de pedidos: exibe a lista de pedidos disponíveis no estoque.
+- Atualização de pedidos: permite editar as informações dos pedidos existentes.
+- Remoção de pedidos: possibilita remover pedidos do estoque.
 
 ## Como executar o projeto
 
@@ -41,7 +29,7 @@ O projeto Happy Makeup - Controle de Estoque é um sistema web desenvolvido util
 
 ## Contribuição
 
-Se você deseja contribuir para o desenvolvimento do projeto Happy Makeup - Controle de Estoque, fique à vontade para fazer um fork deste repositório e enviar suas sugestões por meio de pull requests.
+Se você deseja contribuir para o desenvolvimento do projeto ConsertaSSA, fique à vontade para fazer um fork deste repositório e enviar suas sugestões por meio de pull requests.
 
 ## Contato
 

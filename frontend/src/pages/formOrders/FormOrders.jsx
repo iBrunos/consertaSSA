@@ -234,7 +234,7 @@ export default function FormOrders() {
                   <th className="py-3 px-6">Tipo de Solicitação</th>
                   <th className="py-3 px-6">Data</th>
                   <th className="py-3 px-6">Status</th>
-                  <th className="py-3 px-6">Anexos</th>
+                  <th className="py-3 px-6">Anexo</th>
 
                 </tr>
               </thead>
@@ -272,7 +272,7 @@ export default function FormOrders() {
                           <img
                             src={URL.createObjectURL(new Blob([new Uint8Array(item.anexos.data)], { type: 'image/png' }))}
                             alt="Anexos"
-                            className="w-full h-full rounded-full border lg:border-2"
+                            className="w-full h-full sm:w-20 rounded-full border lg:border-2"
                           />
                         )}
                       </td>

@@ -89,7 +89,7 @@ const update = async (req, res) => {
 
     const anexos = req.file ? req.file.buffer : null;
 
-    await userService.updateService(
+    await orderService.updateService(
       _id,
       type,
       status,

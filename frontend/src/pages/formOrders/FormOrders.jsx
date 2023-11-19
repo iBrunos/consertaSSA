@@ -17,7 +17,7 @@ export default function FormOrders() {
   const [editingItem, setEditingItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const API_URL = 'http://localhost:3000/order';
+  const API_URL = 'https://api-conserta-ssa.vercel.app/order';
 
   const changePageTitle = (newTitle) => {
     document.title = newTitle;

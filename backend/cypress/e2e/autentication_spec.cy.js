@@ -2,7 +2,7 @@
 
 // Função para realizar login e obter o token JWT
 function performLogin(email, password) {
-    return cy.request('POST', 'http://localhost:3000/auth', { email, password })
+    return cy.request('POST', 'https://api-conserta-ssa.vercel.app/auth', { email, password })
       .then((response) => {
         expect(response.status).to.equal(200);
         expect(response.body).to.have.property('token');

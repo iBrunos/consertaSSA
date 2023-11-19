@@ -51,7 +51,7 @@ const Header = () => {
     navigate("/");
   };
 
-  const API_URL = "http://localhost:3000/user";
+  const API_URL = "https://api-conserta-ssa.vercel.appuser";
 
   /*
   const API_URL_STOCK = 'https://api-happymakeup.vercel.app/stock';

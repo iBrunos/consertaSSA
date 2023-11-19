@@ -22,9 +22,9 @@ export default function FormUsers() {
   const changePageTitle = (newTitle) => {
     document.title = newTitle;
   };
-  changePageTitle("Happy Makeup | Usuários");
-  //const API_URL = 'http://localhost:3000/user/';
-  const API_URL = "https://api-happymakeup.vercel.app/user";
+  changePageTitle("ConsertaSSA | Usuários");
+
+  const API_URL = "https://api-conserta-ssa.vercel.app/user";
 
   const fetchItems = async () => {
     const token = localStorage.getItem("token");

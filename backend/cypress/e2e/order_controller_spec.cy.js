@@ -9,7 +9,7 @@ describe('Order Controller - Create', () => {
   it('Should create a new order', () => {
     cy.request({
       method: 'POST',
-      url: 'http://localhost:3000/order',
+      url: 'https://api-conserta-ssa.vercel.app/order',
       headers: {
         Authorization: `Bearer ${authToken}`, // Inclui o token no cabeçalho de autorização
       },
@@ -34,7 +34,7 @@ describe('Order Controller - Find All', () => {
   it('Should retrieve all orders', () => {
     cy.request({
       method: 'GET',
-      url: 'http://localhost:3000/order',
+      url: 'https://api-conserta-ssa.vercel.app/order',
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
@@ -50,7 +50,7 @@ describe('Order Controller - Find By ID', () => {
   it('Should retrieve an order by ID', () => {
     cy.request({
       method: 'GET',
-      url: `http://localhost:3000/order/${orderId}`,
+      url: `https://api-conserta-ssa.vercel.app/order/${orderId}`,
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
@@ -66,7 +66,7 @@ describe('Order Controller - Update', () => {
   it('Should update an order', () => {
     cy.request({
       method: 'PUT',
-      url: `http://localhost:3000/order/${orderId}`,
+      url: `https://api-conserta-ssa.vercel.app/order/${orderId}`,
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
@@ -86,7 +86,7 @@ describe('Order Controller - Delete', () => {
   it('Should delete an order', () => {
     cy.request({
       method: 'DELETE',
-      url: `http://localhost:3000/order/${orderId}`,
+      url: `https://api-conserta-ssa.vercel.app/order/${orderId}`,
       headers: {
         Authorization: `Bearer ${authToken}`,
       },

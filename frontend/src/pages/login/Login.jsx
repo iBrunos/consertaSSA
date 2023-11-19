@@ -69,7 +69,7 @@ export default function Login() {
     e.preventDefault();
     const newItem = { email, password };
     const response = await axios.post(
-      "http://localhost:3000/auth",
+      "https://api-conserta-ssa.vercel.app/auth",
       newItem
     );
     const data = response.data;

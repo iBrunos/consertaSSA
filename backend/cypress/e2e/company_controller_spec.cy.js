@@ -14,14 +14,17 @@ describe('Company Controller - Create', () => {
         Authorization: `Bearer ${authToken}`, // Inclui o token no cabeçalho de autorização
       },
       body: {
-        name: 'Nome da Company',
-        location: 'Localização da Company',
+        email: 'test@example.com',
+        nome: 'Nome da Company',
+        tipo: 'Tipo da Company',
+        senha: 'senha123',
+        cnpj: '99.999.999/0001-99',
       },
     }).then((response) => {
       expect(response.status).to.equal(201);
       expect(response.body.message).to.equal('Company created successfully');
-      expect(response.body.company.name).to.equal('Nome da Company');
-      expect(response.body.company.location).to.equal('Localização da Company');
+      expect(response.body.company.nome).to.equal('Nome da Company');
+      expect(response.body.company.tipo).to.equal('Tipo da Company');
 
       // Armazena o ID da company para uso em outros testes
       companyId = response.body.company.id;
@@ -69,8 +72,8 @@ describe('Company Controller - Update', () => {
         Authorization: `Bearer ${authToken}`,
       },
       body: {
-        name: 'Novo Nome',
-        location: 'Nova Localização',
+        nome: 'Novo Nome',
+        tipo: 'Novo Tipo',
       },
     }).then((response) => {
       expect(response.status).to.equal(200);

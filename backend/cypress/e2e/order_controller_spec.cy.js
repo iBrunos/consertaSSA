@@ -2,7 +2,7 @@
 
 // Variáveis para armazenar o ID da ordem e o token de autorização
 let orderId;
-const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzkxZjQzZGE5YTY5MzNkMDJjMjg5YiIsImlhdCI6MTcwMDM1MDg1NiwiZXhwIjoxNzAwNDM3MjU2fQ.O4a6pDs6vUl-7gpuL-XxblTPS7jTGnkTNakg_kIQAUY"
+const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzkxZjQzZGE5YTY5MzNkMDJjMjg5YiIsImlhdCI6MTcwMDQ5NjQxNSwiZXhwIjoxNzAwNTgyODE1fQ.sDgtRHJK9gxjLPuYiCtSo1v24YPFp828KC-6UZh3AiQ"
 // Testa a criação de uma ordem
 describe('Order Controller - Create', () => {
 
@@ -40,7 +40,6 @@ describe('Order Controller - Find All', () => {
       },
     }).then((response) => {
       expect(response.status).to.equal(200);
-      // Adicione verificações conforme necessário
     });
   });
 });
@@ -56,7 +55,6 @@ describe('Order Controller - Find By ID', () => {
       },
     }).then((response) => {
       expect(response.status).to.equal(200);
-      // Adicione mais verificações conforme necessário
     });
   });
 });

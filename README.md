@@ -30,13 +30,3 @@ O projeto Conserta SSA utiliza a stack MERN (MongoDB, Express.js, React.js, Node
 ## Contribuição
 
 Se você deseja contribuir para o desenvolvimento do projeto ConsertaSSA, fique à vontade para fazer um fork deste repositório e enviar suas sugestões por meio de pull requests.
-
-## Contato
-
-Para mais informações sobre o projeto ou a empresa Archei Software, entre em contato conosco:
-
-- Email: [archeisoftware@gmail.com](mailto:archeisoftware@gmail.com)
-- Website: [www.archei.vercel.app](https://archei.vercel.app/)
-
-Esperamos que este projeto seja útil para a Happy Makeup e que traga benefícios significativos no controle do estoque. Agradecemos seu interesse!
-
